@@ -13,5 +13,15 @@ const winningCombinations = [
     [3, 6, 9],
     [1, 5, 9],
     [3, 5, 7]
-  ]
-  
+]
+
+handleClick = function (event) {
+    var cell = event.target
+    console.log(cell.id);
+}
+
+var cells = document.querySelectorAll("td");
+
+for (var i = 0; i < cells.length; i++) {
+    cells[i].addEventListener('click', handleClick)
+}

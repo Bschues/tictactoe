@@ -1,27 +1,85 @@
-var currentPlayer = "X";
-var nextPlayer = "O";
+let currentPlayer = "X";
+let nextPlayer = "O";
 
-var playerXSelections = new Array();
-var playerOSelections = new Array();
+let playerXSelections = new Array();
+console.log(playerXSelections);
+let playerOSelections = new Array();
+console.log(playerOSelections);
 
 const winningCombinations = [
-    [1, 2, 3],
-    [4, 5, 6],
-    [7, 8, 9],
-    [1, 4, 7],
-    [2, 5, 8],
-    [3, 6, 9],
-    [1, 5, 9],
-    [3, 5, 7]
+    {one: [1, 2, 3]},
+    {two: [4, 5, 6]},
+    {three: [7, 8, 9]},
+    {four: [1, 4, 7]},
+    {five: [2, 5, 8]},
+    {six: [3, 6, 9]},
+    {seven: [1, 5, 9]},
+    {eight: [3, 5, 7]}
 ]
 
+function checkDraw() {
+    return playerOSelections.length + playerXSelections.length >= cells.length
+}
+
+function resetGame() {
+    playerXSelections = new Array();
+    playerOSelections = new Array();
+    for (var i = 0; i < cells.length; i++) {
+        cells[i].innerHTML = ""
+    }
+}
+
+function checkWinner {
+    // Check if player has all values of each combination
+    winningCombinations.forEach()
+    matches = 0;
+
+
+      for each cell in combination
+        if player has cell
+          matches++
+        else break // go to the next combination
+      if there are 3 matches
+        return true
+  
+    // if we made it through each combo without returning true,
+    // then there were no matches and player did not win
+    return false
+  }
+
 handleClick = function (event) {
-    var cell = event.target
+    let cell = event.target
+
+
+    cell.innerHTML = currentPlayer;
+
+    if (currentPlayer === "X") {
+        playerSelections = playerXSelections;
+        nextPlayer = "O";
+    } else {
+        playerSelections = playerOSelections;
+        nextPlayer = "X";
+    }
+
+    playerSelections.push(parseInt(cell.id));
+
+    if(checkWinner(playerSelections)) {
+        alert("Player " + currentPlayer + " wins!")
+        resetGame();
+      }
+
+
+    if (checkDraw()) {
+        alert("Draw!");
+        resetGame();
+    }
+    // Swap players
+    currentPlayer = nextPlayer;
     console.log(cell.id);
 }
 
-var cells = document.querySelectorAll("td");
+let cells = document.querySelectorAll("td");
 
-for (var i = 0; i < cells.length; i++) {
+for (let i = 0; i < cells.length; i++) {
     cells[i].addEventListener('click', handleClick)
 }
